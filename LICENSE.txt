@@ -1,0 +1,28 @@
+SnapAction Commercial End User License Agreement (EULA)
+
+Copyright (c) 2026 SnapAction. All Rights Reserved.
+
+IMPORTANT - READ CAREFULLY:
+This End User License Agreement ("EULA") is a legal agreement between you and SnapAction for the SnapAction desktop software application ("Software"). By downloading, installing, or using the Software, you agree to be bound by the terms of this EULA.
+
+1. GRANT OF LICENSE
+SnapAction grants you a personal, non-exclusive, non-transferable, revocable license to install and use the Software on your devices solely for personal or internal business productivity purposes.
+
+2. PROPRIETARY SOFTWARE & RESTRICTIONS
+The Software is commercial, proprietary software. You may not:
+- Reverse engineer, decompile, or disassemble the Software.
+- Copy, sublicense, rent, lease, resell, or distribute the Software to third parties without prior written consent from SnapAction.
+- Modify, adapt, or create derivative works based on the Software.
+- Remove or alter any proprietary copyright notices or trademarks.
+
+3. ZERO-DISK PRIVACY COMMITMENT
+SnapAction is engineered with a strict Zero-Disk RAM Invariant. Screen captures and clipboard buffers are processed in volatile system memory (RAM). SnapAction does not write unredacted temporary screenshots to local persistent storage.
+
+4. UPDATES
+The Software may periodically check for and download software updates. These updates are subject to this EULA unless accompanied by separate terms.
+
+5. DISCLAIMER OF WARRANTIES
+THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+
+6. LIMITATION OF LIABILITY
+IN NO EVENT SHALL SNAPACTION OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE THE SOFTWARE.
