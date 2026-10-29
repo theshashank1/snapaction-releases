@@ -32,8 +32,10 @@ reports an error instead of silently sending or copying an unredacted result.
 
 SnapAction stores only what it needs to run:
 
-- **Settings** in `%APPDATA%\SnapAction\settings.json`, such as your chosen theme,
-  provider, model, and auto-dismiss timing. API keys are not stored in plaintext.
+- **Settings** in Electron's user-data folder (for the installer build,
+  `%APPDATA%\@snapaction\app\settings.json`; MSIX builds use the Windows package-data
+  location), such as your chosen theme, provider, model, and auto-dismiss timing.
+  API keys are not stored in plaintext.
 - **Encrypted API keys** protected with the Windows Data Protection API (DPAPI)
   through Electron `safeStorage`, tied to your Windows user account.
 - **Local model files** downloaded from the official release channel. These are
@@ -42,8 +44,9 @@ SnapAction stores only what it needs to run:
   events and errors. It does not contain screenshots or clipboard images, and it
   is rotated automatically.
 
-Uninstalling SnapAction removes the application. You can also delete
-`%APPDATA%\SnapAction` to remove settings, encrypted keys, models, and logs.
+Uninstalling SnapAction removes the application. For the installer build, you can
+also delete `%APPDATA%\@snapaction` to remove settings, encrypted keys, models, and
+logs. For MSIX builds, remove the app's data through Windows Settings.
 
 ## 4. Optional cloud AI providers
 

@@ -106,7 +106,7 @@ graph TD
 - **Defense**: The sidecar requires the `X-SnapAction-Token` header. Because this token is a 32-byte cryptographically random string generated at runtime by Electron and passed only via command-line arguments to the spawned child, unprivileged local apps cannot guess the token.
 
 #### Threat 2: Plaintext API Key Extraction from Local Storage
-- **Scenario**: Malware or another user attempts to inspect `%APPDATA%/SnapAction/settings.json` to steal the user's OpenAI or Gemini API keys.
+- **Scenario**: Malware or another user attempts to inspect `%APPDATA%/@snapaction/app/settings.json` to steal the user's OpenAI or Gemini API keys.
 - **Defense**: Keys are encrypted via Windows DPAPI (`safeStorage`). DPAPI uses encryption keys tied to the user's Windows logon session and hardware TPM. The ciphertext cannot be decrypted by another user or outside the user's authenticated desktop session.
 
 #### Threat 3: Cloud Provider Ingestion of Sensitive Customer PII
