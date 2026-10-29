@@ -1,7 +1,7 @@
 # SnapAction — Security Architecture, Privacy Invariants & Threat Model
 
-> **Audience**: Users, Security Teams, Enterprise Auditors, and Open Source Community  
-> **Status**: Production Reference (v1.0.0)  
+> **Audience**: Users, Security Teams, Enterprise Auditors, and Customers  
+> **Status**: Production Reference (v1.0.5)  
 > **Classification**: Public Security & Privacy Specification
 
 ---
@@ -28,7 +28,7 @@ To guarantee complete data confidentiality, SnapAction enforces five non-negotia
 - **Rule**: No image binary, unredacted text snippet, or intermediate vision payload may ever touch the persistent local filesystem (`%TEMP%`, `%APPDATA%`, `%LOCALAPPDATA%`, or pagefiles).
 - **Enforcement**:
   - All screenshots captured via `clipboardWatcher.ts` are retained strictly in Node.js `Buffer` objects in heap memory.
-  - Image scaling via `imageDownscaler.ts` uses Sharp memory streams.
+  - Image scaling via `imageDownscaler.ts` uses Electron's native `nativeImage` memory API, not Sharp.
   - Image transmission to the Python engine sidecar uses in-memory HTTP/1.1 loopback streams (`application/octet-stream`).
   - Active snap buffers are dereferenced and set to `null` the instant the user dismisses the UI or the auto-dismiss timer expires.
 
@@ -40,7 +40,7 @@ To guarantee complete data confidentiality, SnapAction enforces five non-negotia
   - Inbound requests from other origins or processes lacking the token receive immediate `401 Unauthorized`.
 
 ### 1.3. Invariant 3: Hardware-Backed Key Protection (Windows DPAPI)
-- **Rule**: Cloud provider API keys (OpenAI, Gemini, Anthropic) must never be stored in plaintext in settings files or configuration JSON.
+- **Rule**: Cloud provider API keys (OpenAI, Gemini) must never be stored in plaintext in settings files or configuration JSON.
 - **Enforcement**:
   - Handled via [`packages/app/src/main/services/keyVault.ts`](file:///s:/Snap%20Action/packages/app/src/main/services/keyVault.ts) using Electron's `safeStorage` module.
   - On Windows, `safeStorage` utilizes the Windows Data Protection API (`CryptProtectData` / DPAPI), which derives cryptographic keys directly from the logged-in Windows user's credentials and the hardware TPM.
@@ -49,7 +49,7 @@ To guarantee complete data confidentiality, SnapAction enforces five non-negotia
 ### 1.4. Invariant 4: Zero-PII Cloud Transmission
 - **Rule**: No unmasked Personally Identifiable Information (PII) or confidential secrets may ever be sent to third-party cloud vision models.
 - **Enforcement**:
-  - The local OCR engine (`localOcrService.ts`) runs on the local Windows device using native WinRT `Windows.Media.Ocr`.
+  - The local OCR engine (`snapaction_engine/adapters/win_ocr.py`) runs on the local Windows device using native WinRT `Windows.Media.Ocr`, with RapidOCR as the cross-platform fallback.
   - Text is checked locally against the `@snapaction/core` regex catalog for credit cards, SSNs, API tokens, passwords, and emails.
   - The image coordinates are blurred or blacked out using Gaussian convolution in RAM before any cloud vision API call is constructed.
 
@@ -106,7 +106,7 @@ graph TD
 - **Defense**: The sidecar requires the `X-SnapAction-Token` header. Because this token is a 32-byte cryptographically random string generated at runtime by Electron and passed only via command-line arguments to the spawned child, unprivileged local apps cannot guess the token.
 
 #### Threat 2: Plaintext API Key Extraction from Local Storage
-- **Scenario**: Malware or another user attempts to inspect `%APPDATA%/snapaction/config.json` to steal the user's OpenAI or Anthropic API keys.
+- **Scenario**: Malware or another user attempts to inspect `%APPDATA%/SnapAction/settings.json` to steal the user's OpenAI or Gemini API keys.
 - **Defense**: Keys are encrypted via Windows DPAPI (`safeStorage`). DPAPI uses encryption keys tied to the user's Windows logon session and hardware TPM. The ciphertext cannot be decrypted by another user or outside the user's authenticated desktop session.
 
 #### Threat 3: Cloud Provider Ingestion of Sensitive Customer PII

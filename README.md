@@ -13,6 +13,7 @@
   <a href="#-download--installation">Download</a> •
   <a href="#-security--privacy-highlights">Security & Privacy</a> •
   <a href="#-hotkeys-cheat-sheet">Hotkeys</a> •
+  <a href="PRIVACY.md">Privacy</a> •
   <a href="SECURITY.md">Security Policy</a> •
   <a href="#-release-assets--verification">Release Assets</a>
 </p>
@@ -76,6 +77,15 @@ Every official release includes five published files:
 | `SnapAction-<version>.msix` | **Microsoft Store Package** | Store-format package containing the same app and engine. Microsoft re-signs Store submissions. |
 | [`latest.yml`](https://github.com/theshashank1/snapaction-releases/releases/latest/download/latest.yml) | **Update Manifest** | Cryptographic SHA-512 hashes and version verification manifest for auto-updates. |
 | [`SHA256SUMS.txt`](https://github.com/theshashank1/snapaction-releases/releases/latest/download/SHA256SUMS.txt) | **Checksums** | SHA-256 hashes for the installer, blockmap, and MSIX package. |
+
+---
+
+## 🔐 Privacy & Support
+
+Read the **[SnapAction Privacy Policy](PRIVACY.md)** for details on local processing, optional cloud providers, and what is stored on your device.
+
+For installation help or bug reports, open an issue in this repository:
+👉 **<https://github.com/theshashank1/snapaction-releases/issues>**
 
 ---
 
